@@ -1,4 +1,4 @@
-# Лабораторная работа 3
+# Лабораторная работа 4
 
 ## Код программы
 
@@ -7,7 +7,7 @@
     ![Листинг1](https://i.ibb.co/cbSrJQg/1.jpg)
 2. Файл "main.kt"
 
-    ![Листинг2]https://i.ibb.co/55rz2Bz/2.jpg()
+    ![Листинг2](https://i.ibb.co/55rz2Bz/2.jpg)
 3. Файл "RStudent.kt"
 
     ![Листинг3](https://i.ibb.co/C9Ts2BT/3.jpg)
