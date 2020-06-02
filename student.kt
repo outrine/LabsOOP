@@ -15,5 +15,4 @@ val StudentList =
         Students("Emily ", "Sweeney",true),
         Students("George  ", "Cooper",true),
         Students("Timur  ", "Seksembaev",true)
-        //Students("Georgei  ", "Permyakov",false)
     )

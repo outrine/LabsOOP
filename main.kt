@@ -8,9 +8,10 @@ import kotlinx.html.dom.append
 import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.dom.clear
-import org.w3c.dom.HTMLSelectElement
+import org.w3c.dom.HTMLElement
 import kotlinx.html.js.*
 import kotlinx.html.InputType
+import kotlinx.html.*
 
 var ascending = true
 
@@ -19,9 +20,8 @@ fun main() {
 
         .append {
             h1 {
-                attributes += "id" to "cap"
-                +"List students"
-                onClickFunction = onCLickFunctionSort()
+                +"Students"
+                onClickFunction = onCLickFunction()
             }
             ol {
                 attributes += "id" to "listStudents"
@@ -33,70 +33,16 @@ fun main() {
                     }
                 }
             }
-            select {
-                attributes += "id" to "selector"
-                option {
-                    attributes += "value" to "darkslategray"
-                    +"Темно-серый"
-                }
-                option {
-                    attributes += "value" to "cyan"
-                    +"Циан"
-                }
-                onClickFunction = {
-                    val selectColor =
-                        document.getElementById("selector")!!
-                                as HTMLSelectElement
-                    val cap =
-                        document.getElementById("cap")!!
-                    cap.setAttribute("style", "color:${selectColor.value}")
-                }
-            }
-
-            input(InputType.radio) {
-                attributes += "id" to "tomato"
-                attributes += "name" to "contact"
-                attributes += "value" to "tomato"
-                onClickFunction = function("tomato")
-            }
-            label {
-                +"Томатный"
-            }
-
-            input(InputType.radio) {
-                attributes += "id" to "orange"
-                attributes += "name" to "contact"
-                attributes += "value" to "orange"
-                onClickFunction = function("orange")
-
-            }
-            label {
-                +"Апельсин"
-            }
-
-            input(InputType.radio) {
-                attributes += "id" to "navajowhite"
-                attributes += "name" to "contact"
-                attributes += "value" to "navajowhite"
-                onClickFunction = function("navajowhite")
-            }
-            label {
-                +"Кремовый"
-            }
+            input(options = arrayListOf("white","tomato","pink"))
         }
 }
-private fun function(newColor: String): (Event) -> Unit {
-    return {
-        val root = document.getElementById("root")!!
-        root.setAttribute("style", "color:${newColor}")
-    }
-}
 
-private fun onClickFunctionCheck(Student :Students): (Event) -> Unit {
+
+private fun LI.onClickFunctionCheck(Student :Students): (Event) -> Unit {
     return{
         val student = document.getElementById(Student.firstname)!!
         if (Student.in_place) {
-            student.setAttribute("style", "color:gray")
+            student.setAttribute("style", "color:grey")
             Student.in_place = false
         }
         else {
@@ -106,7 +52,7 @@ private fun onClickFunctionCheck(Student :Students): (Event) -> Unit {
     }
 }
 
-private fun onCLickFunctionSort(): (Event) -> Unit {
+private fun H1.onCLickFunction (): (Event) -> Unit {
     return {
         val listStudents = document.getElementById("listStudents")!!
         listStudents.clear()
@@ -127,5 +73,22 @@ private fun onCLickFunctionSort(): (Event) -> Unit {
             }
         }
     }
+}
+
+fun TagConsumer<HTMLElement>.input(options : List<String>,
+                                   classes : String? = null,
+                                   block : P.() -> Unit = {})
+        : HTMLElement = p(classes) {
+    options.forEach {
+        +it
+        input (InputType.radio, name = "colors"){
+            value = it
+            onClickFunction = {
+                val color =  document.getElementById("root")!!
+                color.setAttribute("style","color: ${value}")
+            }
+        }
+    }
+    block()
 }
 
