@@ -2,17 +2,16 @@ package data
 
 data class Students (
     val firstname: String,
-    val surname: String,
-    var in_place: Boolean
+    val surname: String
 )
 
-val StudentList =
+val studentList =
     arrayListOf(
-        Students("Sheldon", "Cooper",true),
-        Students("Howard", "Wolowitz",true),
-        Students("Leonard ", "Hofstadter",true),
-        Students("Leslie", "Winkle",true),
-        Students("Emily ", "Sweeney",true),
-        Students("George  ", "Cooper",true),
-        Students("Timur  ", "Seksembaev",true)
+        Students("Sheldon", "Cooper"),
+        Students("Howard", "Wolowitz"),
+        Students("Leonard ", "Hofstadter"),
+        Students("Leslie", "Winkle"),
+        Students("Emily ", "Sweeney"),
+        Students("George", "Cooper"),
+        Students("Timur", "Seksembaev")
     )
