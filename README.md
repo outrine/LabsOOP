@@ -9,20 +9,45 @@
 
 ## Ход работы 
 
-1. Перенес lessons из props в state.
+1. Перенес lessons из props в Appstate.
 
     ![lessons](https://i.ibb.co/s5ft1bg/1.jpg)
+```
+interface AppProps : RProps {
+    var students: Array<Students>
+}
+
+interface AppState : RState {
+    var lessons: Array<Lesson>
+    var presents: Array<Array<Boolean>>
+}
+```
 
 2. Добавил компонент AddLesson.
-
     ![Add](https://i.ibb.co/1R1tJw0/2.jpg)
 
-    Отображение в программе
+```
+fun RBuilder.fAddLesson(click :(String) -> Unit ) =
+        child(functionalComponent<lessonProps> {props ->
+                input(InputType.text) {
+                    attrs {
+                       id = "lesson"
+                    }
+                }
+                button {
+                    +"Add"
+                    attrs.onClickFunction = {
+                        val nameLesson = document.getElementById("lesson") as HTMLInputElement
+                        props.clicks(nameLesson.value)
+                    }
+                }
+        }){
+```
 
+3. Отображение в программе
     ![WorkAdd](https://i.ibb.co/4Z5q2g2/7.jpg)
 
-3. Указал название лекции
-
+4. Указал название лекции
     ![lessons3](https://i.ibb.co/bsBLMT6/3.jpg)
 
 ## Работа программы
